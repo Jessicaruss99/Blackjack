@@ -136,7 +136,7 @@ function dealerHit() {
         //console.log(playerTotal)
     }
     //console.log("Dealer Total:" + dealerTotal)
-    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+    //dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
 }
@@ -149,13 +149,14 @@ function dealerHitHidden() {
     dealerCards.append(cardImg);
     dealerTotal += getValue(card);
     //console.log("Dealer Total:" + dealerTotal)
-    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+    //dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
 }
 
 function revealHiddenCard() {
     document.getElementById("hiddenCard").src = "./cards/" + hiddenCard.value + "-" + hiddenCard.suit + ".png";
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 }
 
 function newGame() {
@@ -165,6 +166,7 @@ function newGame() {
     dealerCards.innerHTML = "";
     playerCards.innerHTML = "";
     status.innerHTML = "";
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: ";
 
     //reset dealer and player totals
     playerTotal = 0;
