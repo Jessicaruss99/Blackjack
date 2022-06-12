@@ -3,7 +3,7 @@ import Deck from "./deck.js";
 //get value of cards
 
 //create new deck
-const deck = new Deck();
+var deck = new Deck();
 console.log(deck.cards);
 
 //initialize round counter and set to 0
@@ -11,9 +11,10 @@ var roundCount = 0;
 
 //make constants for each div tag
 const status = document.querySelector(".status");
-const dealerDeck = document.querySelector(".dealer-deck");
 const dealerCards =  document.querySelector(".dealer-cards");
 const playerCards = document.querySelector(".player-cards");
+const dealerCardTotal =  document.querySelector(".dealer-total");
+const playerCardTotal = document.querySelector(".player-total");
 
 var dealerTotal =0;
 var playerTotal=0;
@@ -50,7 +51,10 @@ window.onload = function() {
   };
 
 function stay(){
-  
+while (dealerTotal<17){
+    dealerHit();
+}
+
 
 if (playerTotal>21){
     statusMessage = "BUST! You Lose"
@@ -70,6 +74,7 @@ else if (playerTotal<dealerTotal){
 }
 status.innerHTML = "<h2>" + statusMessage + "</h2>";
 
+    hitID.disabled = true;
 }
 
 function playerHit(){
@@ -79,7 +84,13 @@ function playerHit(){
     playerCards.append(cardImg);
     playerTotal += getValue(card);
     console.log("Player Total:" + playerTotal)
+   
+    playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
+    if(playerTotal >=21){
+        stay();
+    }
 }
+
 function dealerHit(){
     let cardImg = document.createElement("img");
     let card = deck.pop();
@@ -87,14 +98,18 @@ function dealerHit(){
     dealerCards.append(cardImg);
     dealerTotal += getValue(card);
     console.log("Dealer Total:" + dealerTotal)
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+
+
 }
 
 function newGame(){
     //game order
 
     //set div equal to "" so previous game is cleared
-    dealerCards.innerHTML = "<h2>Dealer</h2>";
-    playerCards.innerHTML = " <h2>Player</h2>";
+    dealerCards.innerHTML = "";
+    playerCards.innerHTML = "";
+    status.innerHTML = "";
     
     //reset dealer and player totals
     playerTotal = 0;
@@ -102,7 +117,12 @@ function newGame(){
 
     roundCount++;
 
+    hitID.disabled = false;
+
     //after 5 rounds, put all cards back into deck
+    if(roundCount%5 ==0){
+        deck = new Deck();
+    }
 
 
 
@@ -114,7 +134,6 @@ deck.shuffle();
 //deal player 1 card face up from deck
 playerHit()
 
-
 //deal dealer 1 card face up from deck
 dealerHit();
 
@@ -123,32 +142,6 @@ playerHit();
 
 //deal dealer 1 card face down from deck
 dealerHit();
-
-//player can hit or stand
-//if hit, add a card
-// check the new total
-//if over 21, bust and dealer wins, new round
-//unless cards have a A, then turn the 11 to a 1 and keep going, unless still bust, then dealer wins and new round
-// if 21 win
-//under 21, hit or stand again and repeat
-
-//dealer turn
-//show dealer second card to player
-//if total 17 or more, stand
-//if total 16 or less, hit and repeat
-//if over 21, dealer bust and player wins, new round
-//unless cards have a A, then turn the 11 to a 1 and keep going, unless still bust, then dealer wins and new round
-
-//after both stand, check player vs dealer total, higher not over 21 wins
-//if totals = then tie 
-
-//end of round
-//add dealer cards and player cards to discard pile
-//increment round counter
-//check round counter, every 5 rounds add cards back to deck and reshuffle
-
-//new round
-
 
 }
 

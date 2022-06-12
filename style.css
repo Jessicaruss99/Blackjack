@@ -7,3 +7,25 @@ body{
 img{
     height: 10em;
 }
+
+#hit{
+    background-color:blue;
+    color: antiquewhite;
+    font-size: 16px;
+    width: 15%;
+}
+
+#playagain{
+    background-color: darkred;
+    color: antiquewhite;
+    font-size: 16px;
+    width: 15%;
+}
+
+#stay{
+    background-color:goldenrod;
+    color: antiquewhite;
+    font-size: 16px;
+    width: 15%;
+
+}
