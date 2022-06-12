@@ -9,6 +9,9 @@ console.log(deck.cards);
 //initialize round counter and set to 0
 var roundCount = 0;
 
+var dealerAce =0;
+var playerAce=0;
+
 //make constants for each div tag
 const status = document.querySelector(".status");
 const dealerCards =  document.querySelector(".dealer-cards");
@@ -16,22 +19,21 @@ const playerCards = document.querySelector(".player-cards");
 const dealerCardTotal =  document.querySelector(".dealer-total");
 const playerCardTotal = document.querySelector(".player-total");
 
+var hiddenCard;
+
 var dealerTotal =0;
 var playerTotal=0;
 
 var canHit = true;
 
-var dealerAces =0;
-var playerAces =0;
-
 var statusMessage = "";
 
 //if player unable to hit, disable the hit button
 if(canHit == false){
- hitID.disabled = true;
+ hitID.hidden = true;
 }
 
-//const playerCard = deck.cards[0];
+
 
 //click listener for hit
 const hitID = document.getElementById("hit");
@@ -55,7 +57,6 @@ while (dealerTotal<17){
     dealerHit();
 }
 
-
 if (playerTotal>21){
     statusMessage = "BUST! You Lose"
 }
@@ -74,16 +75,35 @@ else if (playerTotal<dealerTotal){
 }
 status.innerHTML = "<h2>" + statusMessage + "</h2>";
 
-    hitID.disabled = true;
+revealHiddenCard();
+    hitID.hidden = true;
+    stayID.hidden =true;
 }
 
 function playerHit(){
     let cardImg = document.createElement("img");
     let card = deck.pop();
+    if(card.value == "A"){
+        playerAce++;
+    }
     cardImg.src = "./cards/" + card.value +"-"+card.suit+ ".png";
     playerCards.append(cardImg);
-    playerTotal += getValue(card);
-    console.log("Player Total:" + playerTotal)
+    // if(playerTotal>10 && getValue(card)==11){
+    //         playerTotal += 1
+    //     }
+    //     else{
+    //         playerTotal += getValue(card);
+    //     }
+    if (playerTotal>11 && playerAce>0){
+        playerTotal += getValue(card)-10;
+        console.log(playerTotal)
+    } else{
+        playerTotal += getValue(card);
+        console.log(playerTotal)
+    }
+    
+    
+    //console.log("Player Total:" + playerTotal)
    
     playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
     if(playerTotal >=21){
@@ -91,16 +111,34 @@ function playerHit(){
     }
 }
 
+
 function dealerHit(){
     let cardImg = document.createElement("img");
     let card = deck.pop();
     cardImg.src = "./cards/" + card.value +"-"+card.suit+ ".png";
     dealerCards.append(cardImg);
     dealerTotal += getValue(card);
-    console.log("Dealer Total:" + dealerTotal)
+    //console.log("Dealer Total:" + dealerTotal)
     dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
+}
+function dealerHitHidden(){
+    let cardImg = document.createElement("img");
+    cardImg.setAttribute("id", "hiddenCard")
+    let card = deck.pop();
+    hiddenCard = card;
+    cardImg.src = "./cards/BACK.png";
+    dealerCards.append(cardImg);
+    dealerTotal += getValue(card);
+    //console.log("Dealer Total:" + dealerTotal)
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+
+
+}
+
+function revealHiddenCard(){
+   document.getElementById("hiddenCard").src = "./cards/" + hiddenCard.value +"-"+hiddenCard.suit+ ".png";
 }
 
 function newGame(){
@@ -117,7 +155,8 @@ function newGame(){
 
     roundCount++;
 
-    hitID.disabled = false;
+    hitID.hidden = false;
+    stayID.hidden =false;
 
     //after 5 rounds, put all cards back into deck
     if(roundCount%5 ==0){
@@ -135,7 +174,7 @@ deck.shuffle();
 playerHit()
 
 //deal dealer 1 card face up from deck
-dealerHit();
+dealerHitHidden();
 
 //deal player 1 card face up from deck
 playerHit();
@@ -148,7 +187,8 @@ dealerHit();
 function getValue(card){
     if(isNaN(card.value)){
         if(card.value == "A"){
-            return 11;
+                return 11;
+            
         }
         return 10;
     }
