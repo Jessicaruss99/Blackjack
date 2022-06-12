@@ -3,6 +3,7 @@ body{
     background-color:green;
     text-align: center;
     color: antiquewhite;
+  
 }
 img{
     height: 10em;
@@ -29,3 +30,25 @@ img{
     width: 15%;
 
 }
+
+.status{
+    font-size: xx-large;
+}
+
+#right {
+    position: relative;
+    width: 50%;
+    float: left;
+    height: 100%;
+  }
+  
+  #left {
+    position: relative;
+    width: 50%;
+    float: left;
+    height: 100%;
+  }
+
+  p{
+    font-size: xx-large;
+  }

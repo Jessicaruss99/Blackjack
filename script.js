@@ -12,8 +12,14 @@ var roundCount = 0;
 var dealerAce = 0;
 var playerAce = 0;
 
+//initialize variables for number of wins, loses and ties
+var wins =0;
+var lose = 0;
+var ties =0; 
+
 //make constants for each div tag
 const status = document.querySelector(".status");
+const stats = document.querySelector(".stats");
 const dealerCards = document.querySelector(".dealer-cards");
 const playerCards = document.querySelector(".player-cards");
 const dealerCardTotal = document.querySelector(".dealer-total");
@@ -58,23 +64,29 @@ function stay() {
     }
 
     if (playerTotal > 21) {
-        statusMessage = "BUST! You Lose"
+        lose++;
+        statusMessage = "BUST! You Lose";
     }
     else if (dealerTotal > 21) {
+        wins++;
 
-        statusMessage = "You Win"
+        statusMessage = "You Win";
     }
     else if (dealerTotal == playerTotal) {
-        statusMessage = "TIE"
+        ties++;
+        statusMessage = "TIE";
     }
     else if (playerTotal > dealerTotal) {
+        wins++;
         statusMessage = "You Win"
     }
     else if (playerTotal < dealerTotal) {
+        lose++;
         statusMessage = "You Lose"
     }
 
     status.innerHTML = "<h2>" + statusMessage + "</h2>";
+    
 
     revealHiddenCard();
     hitID.hidden = true;
@@ -84,14 +96,15 @@ function stay() {
 function playerHit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
-    if (card.value == "A") {
-        playerAce++;
-    }
+    // if (card.value == "A") {
+    //     playerAce++;
+    // }
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     playerCards.append(cardImg);
 
-    if (playerTotal > 11 && playerAce > 0) {
+    if (playerTotal > 11 && card.value == "A") {
         playerTotal += getValue(card) - 10;
+        // playerAce--;
         //console.log(playerTotal)
     } else {
         playerTotal += getValue(card);
@@ -109,9 +122,19 @@ function playerHit() {
 function dealerHit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
+    // if (card.value == "A") {
+    //     dealerAce++;
+    // }
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     dealerCards.append(cardImg);
-    dealerTotal += getValue(card);
+   
+    if (dealerTotal > 11 && card.value == "A") {
+        dealerTotal += getValue(card)-10;
+        //console.log(playerTotal)
+    } else {
+        dealerTotal += getValue(card);
+        //console.log(playerTotal)
+    }
     //console.log("Dealer Total:" + dealerTotal)
     dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
@@ -147,6 +170,7 @@ function newGame() {
     playerTotal = 0;
     dealerTotal = 0;
 
+
     roundCount++;
 
     hitID.hidden = false;
@@ -173,6 +197,12 @@ function newGame() {
 
     //deal dealer 1 card face down from deck
     dealerHit();
+
+    stats.innerHTML = 
+     "<p>There have been " + parseInt(wins) + " wins </p>" +
+     "<p>There have been " + parseInt(lose) + " loses </p>" + 
+     "<p>There have been " + parseInt(ties) + " ties </p>" +
+     "<p>There have been " + parseInt(roundCount) + " rounds </p>";
 
 }
 

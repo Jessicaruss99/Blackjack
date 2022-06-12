@@ -17,7 +17,6 @@ export default class Deck {
         return this.cards.shift();
     }
 
-
     //shuffle deck 
     shuffle() {
         for (let i = this.numCards - 1; i > 0; i--) {
