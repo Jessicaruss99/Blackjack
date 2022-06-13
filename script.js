@@ -59,7 +59,8 @@ window.onload = function () {
 };
 
 function stay() {
-    while (dealerTotal < 17) {
+  
+    while (dealerTotal < 17 && playerTotal<21) {
         dealerHit();
     }
 
