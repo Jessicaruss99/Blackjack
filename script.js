@@ -86,6 +86,11 @@ function stay() {
     }
 
     status.innerHTML = "<h2>" + statusMessage + "</h2>";
+    stats.innerHTML = 
+    "<p>There have been " + parseInt(wins) + " wins </p>" +
+    "<p>There have been " + parseInt(lose) + " loses </p>" + 
+    "<p>There have been " + parseInt(ties) + " ties </p>" +
+    "<p>There have been " + parseInt(roundCount) + " rounds </p>";
     
 
     revealHiddenCard();
@@ -160,7 +165,13 @@ function revealHiddenCard() {
 }
 
 function newGame() {
+
     //game order
+    stats.innerHTML = 
+    "<p>There have been " + parseInt(wins) + " wins </p>" +
+    "<p>There have been " + parseInt(lose) + " loses </p>" + 
+    "<p>There have been " + parseInt(ties) + " ties </p>" +
+    "<p>There have been " + parseInt(roundCount) + " rounds </p>";
 
     //set div equal to "" so previous game is cleared
     dealerCards.innerHTML = "";
@@ -200,11 +211,11 @@ function newGame() {
     //deal dealer 1 card face down from deck
     dealerHit();
 
-    stats.innerHTML = 
-     "<p>There have been " + parseInt(wins) + " wins </p>" +
-     "<p>There have been " + parseInt(lose) + " loses </p>" + 
-     "<p>There have been " + parseInt(ties) + " ties </p>" +
-     "<p>There have been " + parseInt(roundCount) + " rounds </p>";
+    // stats.innerHTML = 
+    //  "<p>There have been " + parseInt(wins) + " wins </p>" +
+    //  "<p>There have been " + parseInt(lose) + " loses </p>" + 
+    //  "<p>There have been " + parseInt(ties) + " ties </p>" +
+    //  "<p>There have been " + parseInt(roundCount) + " rounds </p>";
 
 }
 
