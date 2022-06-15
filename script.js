@@ -121,7 +121,7 @@ function stay() {
     dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
-    while (dealerTotal < 17 && playerTotal < 21) {
+    while (dealerTotal < 17 && playerTotal <= 21) {
         dealerHit();
     }
 
