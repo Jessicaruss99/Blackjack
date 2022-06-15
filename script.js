@@ -62,8 +62,16 @@ window.onload = function () {
 };
 
 function stay() {
-    playerTotal = checkAces(playerAceCount, playerTotal);
+    // playerTotal = checkAces(playerAceCount, playerTotal);
   
+    //checkAces();
+    playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
+   
+   // dealerTotal = checkAces(dealerAceCount, dealerTotal);
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+
+    console.log("stay" + playerAceCount + playerTotal);
+    
     while (dealerTotal < 17 && playerTotal<21) {
         dealerHit();
     }
@@ -108,28 +116,35 @@ function stay() {
 function playerHit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
-    // if (card.value == "A") {
-    //     playerAce++;
-    // }
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     playerCards.append(cardImg);
-
-    // if (playerTotal > 11 && card.value == "A") {
-    //     playerTotal += getValue(card) - 10;
-    //     // playerAce--;
-    //     //console.log(playerTotal)
-    // } else {}
 
         if(card.value == "A"){
             playerAceCount++;
         }
-        playerTotal += getValue(card);
-        //console.log(playerTotal)
-    
-        
+        //console.log(playerAceCount);
 
+        playerTotal += getValue(card);
+        checkAces();
+        
+        //playerTotal = checkAces(playerAceCount, playerTotal);
+        //console.log(playerAceCount)
+    
     playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
-    if (playerTotal >= 21) {
+    // if (playerTotal ==21){
+    //     stay();
+    // }
+    // else if (playerTotal>21){
+    //     checkAces();
+    //     playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
+    // }
+    // then ( stay())
+    
+    // if(checkAces(playerAceCount, playerTotal)>21){
+    //     stay();
+    // }
+
+    if(playerTotal>=21){
         stay();
     }
 }
@@ -142,15 +157,25 @@ function dealerHit() {
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     dealerCards.append(cardImg);
    
-    if (dealerTotal > 11 && card.value == "A") {
-        dealerTotal += getValue(card)-10;
-        //console.log(playerTotal)
-    } else {
-        dealerTotal += getValue(card);
-        //console.log(playerTotal)
+    // if (dealerTotal > 11 && card.value == "A") {
+    //     dealerTotal += getValue(card)-10;
+    //     //console.log(playerTotal)
+    // } else {
+    //     dealerTotal += getValue(card);
+    //     //console.log(playerTotal)
+    // }
+
+    if(card.value == "A"){
+        dealerAceCount++;
     }
+    //console.log(dealerAceCount);
+
+    dealerTotal += getValue(card);
+    checkAcesDealer();
+
+    //dealerTotal = checkAces(dealerAceCount, dealerTotal);
     //console.log("Dealer Total:" + dealerTotal)
-    //dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
 }
@@ -162,8 +187,15 @@ function dealerHitHidden() {
     cardImg.src = "./cards/BACK.png";
     dealerCards.append(cardImg);
     dealerTotal += getValue(card);
+    if(card.value == "A"){
+        dealerAceCount++;
+    }
+    checkAcesDealer();
+
+    //dealerTotal = checkAces(dealerAceCount, dealerTotal);
+
     //console.log("Dealer Total:" + dealerTotal)
-    //dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
 }
@@ -191,6 +223,9 @@ function newGame() {
     //reset dealer and player totals
     playerTotal = 0;
     dealerTotal = 0;
+
+    playerAceCount =0;
+    dealerAceCount =0;
 
 
     roundCount++;
@@ -228,7 +263,6 @@ function getValue(card) {
     if (isNaN(card.value)) {
         if (card.value == "A") {
             return 11;
-
         }
         return 10;
     }
@@ -237,20 +271,27 @@ function getValue(card) {
     }
 }
 
-function checkAces(aceCount, total){
-    // if(playerAceCount >0 && playerTotal>21){
-    //     for (let i =0; i>playerAceCount; i++){
-    //         playerTotal -= 10;
-    //         playerAceCount--;
-    //     }
-    //     // playerTotal = playerTotal -10;
-        
-    // }
-
-    while(aceCount >0 && total >21){
-        total -=10;
-        aceCount--;
+function checkAces(){
+    while(playerAceCount >0 && playerTotal >21){
+        playerTotal = playerTotal-10;
+        playerAceCount--;
     }
-    return total;
+
+    // if(total>21){
+    //     for (let i =0; i<aceCount; i++){
+    //         total = total-10;
+    //         aceCount--;
+    //     }
+    // }
+    // return total;
+   
+}
+
+function checkAcesDealer(){
+    while(dealerAceCount >0 && dealerTotal >21){
+        dealerTotal = dealerTotal-10;
+        dealerAceCount--;
+    }
+
    
 }
