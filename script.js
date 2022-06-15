@@ -9,13 +9,12 @@ console.log(deck.cards);
 //initialize round counter and set to 0
 var roundCount = 0;
 
-var dealerAce = 0;
-var playerAce = 0;
-
 //initialize variables for number of wins, loses and ties
 var wins =0;
 var lose = 0;
 var ties =0; 
+
+var hitCount=0;
 
 //make constants for each div tag
 const status = document.querySelector(".status");
@@ -108,12 +107,16 @@ function stay() {
     "<p>There have been " + parseInt(roundCount) + " rounds </p>";
     
 
-    revealHiddenCard();
+    // revealHiddenCard();
     hitID.hidden = true;
     stayID.hidden = true;
 }
 
 function playerHit() {
+    hitCount++;
+    if(hitCount>2){
+        revealHiddenCard();
+    }
     let cardImg = document.createElement("img");
     let card = deck.pop();
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
@@ -227,6 +230,7 @@ function newGame() {
     playerAceCount =0;
     dealerAceCount =0;
 
+    hitCount=0;
 
     roundCount++;
 
