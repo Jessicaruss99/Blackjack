@@ -60,13 +60,14 @@ window.onload = function () {
 };
 
 function newGame() {
+    roundCount++;
 
     //game order
     stats.innerHTML =
-        "<p>There have been " + parseInt(wins) + " wins </p>" +
-        "<p>There have been " + parseInt(lose) + " loses </p>" +
-        "<p>There have been " + parseInt(ties) + " ties </p>" +
-        "<p>There have been " + parseInt(roundCount) + " rounds </p>";
+    "<p>You have " + parseInt(wins) + " wins </p>" +
+    "<p>You have " + parseInt(lose) + " loses </p>" +
+    "<p>There have been " + parseInt(ties) + " ties </p>" +
+    "<p>Round: " + parseInt(roundCount) + "</p>";
 
     //set div equal to "" so previous game is cleared
     dealerCards.innerHTML = "";
@@ -83,7 +84,7 @@ function newGame() {
 
     // hitCount = 0;
 
-    roundCount++;
+    
 
     hitID.hidden = false;
     stayID.hidden = false;
@@ -149,10 +150,10 @@ function stay() {
 
     status.innerHTML = "<h2>" + statusMessage + "</h2>";
     stats.innerHTML =
-        "<p>There have been " + parseInt(wins) + " wins </p>" +
-        "<p>There have been " + parseInt(lose) + " loses </p>" +
+        "<p>You have " + parseInt(wins) + " wins </p>" +
+        "<p>You have " + parseInt(lose) + " loses </p>" +
         "<p>There have been " + parseInt(ties) + " ties </p>" +
-        "<p>There have been " + parseInt(roundCount) + " rounds </p>";
+        "<p>Round: " + parseInt(roundCount) + "</p>";
 
     hitID.hidden = true;
     stayID.hidden = true;
