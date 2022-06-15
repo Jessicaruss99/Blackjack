@@ -196,7 +196,7 @@ function dealerHit() {
     dealerTotal += getValue(card);
     checkAcesDealer();
 
-    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+   // dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 
 }
@@ -213,7 +213,7 @@ function dealerHitHidden() {
     }
     checkAcesDealer();
 
-    dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
+    //dealerCardTotal.innerHTML = "<h2>Dealer Total: " + dealerTotal + "</h2>";
 
 }
 
