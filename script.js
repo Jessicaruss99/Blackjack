@@ -56,6 +56,8 @@ playID.addEventListener("click", newGame);
 
 
 window.onload = function () {
+ 
+     deck.shuffle();
     newGame()
 };
 
@@ -95,10 +97,28 @@ function newGame() {
     //after 5 rounds, put all cards back into deck
     if (roundCount % 5 == 0) {
         deck = new Deck();
+         //shuffle cards
+    deck.shuffle();
+    console.log("shuffling");
+    // setTimeout(function() {
+    //     $('#shuffling').show()
+    //   } );
+    //   setTimeout(function() {
+    //     $('#shuffling').hide()
+    //   } );
+ setTimeout(function() {
+        $('#flex').hide()
+      } );
+    $('#shuffling').fadeIn('fast', function(){
+        $('#shuffling').delay(1000).fadeOut(); 
+     });
+     setTimeout(function() {
+        $('#flex').show()
+      },2000 );
+
     }
 
-    //shuffle cards
-    deck.shuffle();
+   
 
     //place bets if added
 

@@ -8,6 +8,8 @@
     <title>Blackjack</title>
     <script src="script.js" type="module"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
 </head>
 
 <body>
@@ -15,9 +17,13 @@
         <h1>Blackjack by Jessica Russ</h1>
     </header>
     <main>
+        <!-- <div id="shuffling" style="display:none;"> <h1>SHUFFLING DECK</h1></div> -->
         
         <div class="flex">
             
+            <div id="shuffling" style="display:none;"> <h1>SHUFFLING DECK</h1></div>
+            
+            <div id = "flex">
             <div class="dealer-total">
                 <!-- <h2>Dealer Total: </h2> -->
             </div>
@@ -29,6 +35,7 @@
             <button id="hit" hidden="true">Hit</button>
             <button id="stay" hidden="true">Stay</button>
             <button id="playagain"    >New Game</button>
+        </div>
         </div>
         <div class="flex">
             <div class="status"></div>
