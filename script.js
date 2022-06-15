@@ -60,6 +60,9 @@ window.onload = function () {
 };
 
 function newGame() {
+    hitID.hidden = false;
+    stayID.hidden = false;
+    playID.hidden =true;
     roundCount++;
 
     //game order
@@ -115,6 +118,8 @@ function newGame() {
 }
 
 function stay() {
+    hitID.hidden = true;
+    stayID.hidden = true;
 
     playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
 
@@ -159,6 +164,7 @@ function stay() {
     stayID.hidden = true;
 
     revealHiddenCard();
+    playID.hidden =false;
 }
 
 function playerHit() {
