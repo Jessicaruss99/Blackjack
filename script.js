@@ -34,6 +34,9 @@ var canHit = true;
 
 var statusMessage = "";
 
+var playerAceCount =0;
+var dealerAceCount =0;
+
 //if player unable to hit, disable the hit button
 if (canHit == false) {
     hitID.hidden = true;
@@ -59,12 +62,15 @@ window.onload = function () {
 };
 
 function stay() {
+    playerTotal = checkAces(playerAceCount, playerTotal);
   
     while (dealerTotal < 17 && playerTotal<21) {
         dealerHit();
     }
+    
 
     if (playerTotal > 21) {
+        
         lose++;
         statusMessage = "BUST! You Lose";
     }
@@ -108,15 +114,19 @@ function playerHit() {
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     playerCards.append(cardImg);
 
-    if (playerTotal > 11 && card.value == "A") {
-        playerTotal += getValue(card) - 10;
-        // playerAce--;
-        //console.log(playerTotal)
-    } else {
+    // if (playerTotal > 11 && card.value == "A") {
+    //     playerTotal += getValue(card) - 10;
+    //     // playerAce--;
+    //     //console.log(playerTotal)
+    // } else {}
+
+        if(card.value == "A"){
+            playerAceCount++;
+        }
         playerTotal += getValue(card);
         //console.log(playerTotal)
-    }
-
+    
+        
 
     playerCardTotal.innerHTML = "<h2>Player Total: " + playerTotal + "</h2>";
     if (playerTotal >= 21) {
@@ -128,9 +138,7 @@ function playerHit() {
 function dealerHit() {
     let cardImg = document.createElement("img");
     let card = deck.pop();
-    // if (card.value == "A") {
-    //     dealerAce++;
-    // }
+ 
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
     dealerCards.append(cardImg);
    
@@ -212,11 +220,7 @@ function newGame() {
     //deal dealer 1 card face down from deck
     dealerHit();
 
-    // stats.innerHTML = 
-    //  "<p>There have been " + parseInt(wins) + " wins </p>" +
-    //  "<p>There have been " + parseInt(lose) + " loses </p>" + 
-    //  "<p>There have been " + parseInt(ties) + " ties </p>" +
-    //  "<p>There have been " + parseInt(roundCount) + " rounds </p>";
+  
 
 }
 
@@ -231,4 +235,22 @@ function getValue(card) {
     else {
         return parseInt(card.value)
     }
+}
+
+function checkAces(aceCount, total){
+    // if(playerAceCount >0 && playerTotal>21){
+    //     for (let i =0; i>playerAceCount; i++){
+    //         playerTotal -= 10;
+    //         playerAceCount--;
+    //     }
+    //     // playerTotal = playerTotal -10;
+        
+    // }
+
+    while(aceCount >0 && total >21){
+        total -=10;
+        aceCount--;
+    }
+    return total;
+   
 }
