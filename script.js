@@ -14,7 +14,7 @@ var lose = 0;
 var ties = 0;
 
 //initialize hit count so dealer card is revealed after so many hits
-var hitCount = 0;
+//var hitCount = 0;
 
 //make constants for each div tag
 const status = document.querySelector(".status");
@@ -156,13 +156,15 @@ function stay() {
 
     hitID.hidden = true;
     stayID.hidden = true;
+
+    revealHiddenCard();
 }
 
 function playerHit() {
-    hitCount++;
-    if (hitCount > 2) {
-        revealHiddenCard();
-    }
+    // hitCount++;
+    // if (hitCount > 2) {
+    //     revealHiddenCard();
+    // }
     let cardImg = document.createElement("img");
     let card = deck.pop();
     cardImg.src = "./cards/" + card.value + "-" + card.suit + ".png";
