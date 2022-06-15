@@ -1,37 +1,38 @@
-body{
+body {
     background-image: url("./blackjack.jpg");
-    background-color:green;
+    background-color: green;
     text-align: center;
     color: antiquewhite;
-  
+
 }
-img{
+
+img {
     height: 10em;
 }
 
-#hit{
-    background-color:blue;
+#hit {
+    background-color: blue;
     color: antiquewhite;
     font-size: 16px;
     width: 15%;
 }
 
-#playagain{
+#playagain {
     background-color: darkred;
     color: antiquewhite;
     font-size: 16px;
     width: 15%;
 }
 
-#stay{
-    background-color:goldenrod;
+#stay {
+    background-color: goldenrod;
     color: antiquewhite;
     font-size: 16px;
     width: 15%;
 
 }
 
-.status{
+.status {
     font-size: xx-large;
 }
 
@@ -40,22 +41,22 @@ img{
     width: 50%;
     float: left;
     height: 100%;
-  }
-  
-  #left {
+}
+
+#left {
     position: relative;
     width: 50%;
     float: left;
     height: 100%;
-  }
+}
 
-  p{
+p {
     font-size: xx-large;
-  }
+}
 
-  footer{
+footer {
     position: fixed;
-    bottom:0;
-   width:100%;
-   height:100px;
-  }
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+}
