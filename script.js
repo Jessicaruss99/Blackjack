@@ -14,7 +14,7 @@ var lose = 0;
 var ties = 0;
 
 //initialize hit count so dealer card is revealed after so many hits
-//var hitCount = 0;
+// var hitCount = 0;
 
 //make constants for each div tag
 const status = document.querySelector(".status");
@@ -81,7 +81,7 @@ function newGame() {
     playerAceCount = 0;
     dealerAceCount = 0;
 
-    hitCount = 0;
+    // hitCount = 0;
 
     roundCount++;
 
