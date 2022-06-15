@@ -8,6 +8,7 @@ body{
 img{
     height: 10em;
     margin:  10px;
+    border-radius: 5px;
 }
 
 #hit{
