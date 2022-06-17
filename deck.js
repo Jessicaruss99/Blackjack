@@ -1,5 +1,6 @@
 const SUITS = ["Clubs", "Hearts", "Spades", "Diamonds"]
-const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+ const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+// const VALUES = ["A", "10", "J", "Q", "K"]
 
 
 export default class Deck {
@@ -15,6 +16,10 @@ export default class Deck {
     //method to get another card
     pop() {
         return this.cards.shift();
+    }
+
+    getcardSpecific(suit, value){
+        return new Card(suit, value);
     }
 
 
@@ -33,7 +38,7 @@ export default class Deck {
 
 
 
-class Card {
+export class Card {
 
     constructor(suit, value) {
         this.suit = suit;
